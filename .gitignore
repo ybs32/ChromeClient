@@ -1,0 +1,11 @@
+# for Mac
+.DS_Store
+
+# Systems
+Thumbs.db
+
+# Editor, IDE
+.project
+/.idea
+/.vscode
+.settings/
