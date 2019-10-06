@@ -42,7 +42,7 @@ gulp.task('scripts', (cb) => {
         extensions: ['.ts', '.js'],
         modules: [
           'node_modules/',
-          'app/scripts/'
+          'app/scripts/',
         ]
       }
     },

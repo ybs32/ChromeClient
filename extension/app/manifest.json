@@ -13,5 +13,14 @@
     "scripts": [
       "scripts/background.js"
     ]
-  }
+  },
+  "content_scripts": [{
+    "matches": [
+      "http://*/*"
+    ],
+    "js": [
+        "scripts/env.js",
+        "scripts/content.js"
+    ]
+  }]
 }
