@@ -13,15 +13,27 @@ RUN set -x \
 
 ###
 COPY ./boot.sh /var/www/
-COPY ./service /var/www/service
+COPY ./service /var/www/service/
+COPY ./extension /var/www/exntension/
 
 WORKDIR /var/www/service
 RUN set -x \
     && npm install
 
+###
+WORKDIR /var/www/exntension
+RUN set -x \
+    && npm install \
+    && npm run build \
+    && cp ./app/scripts/env.js ./dist/chrome/scripts/
+
 ### Chrome User
-# ENV USER=chrome
-# RUN useradd -m ${USER}
-# USER ${USER}}
+WORKDIR /var/www/
+ENV USER=chrome
+RUN set -x \
+    && useradd -m ${USER} \
+    && chown -R $USER:$USER ./boot.sh \
+    && chmod 755 ./boot.sh
+USER ${USER}
 
 # ENTRYPOINT ["/var/www/boot.sh"]
