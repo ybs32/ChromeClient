@@ -2,7 +2,20 @@ FROM ubuntu:18.04
 
 RUN set -x \
     && apt update \
-    && apt install -y nodejs npm wget
+    && apt install -y wget \
+    && apt install -y nodejs npm --fix-missing
+
+RUN set -x \
+    && npm cache clean \
+    && npm install -g n \
+    && n stable \
+    && hash -r
+
+RUN set -x \
+    && apt purge -y nodejs npm \
+    && apt autoremove -y \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ### Install chrome
 WORKDIR /tmp/chrome
@@ -12,7 +25,7 @@ RUN set -x \
     && apt install -y ./${CHROME_VERSION}
 
 ###
-COPY ./boot.sh /var/www/
+COPY ./package/boot.sh /var/www/
 COPY ./service /var/www/service/
 COPY ./extension /var/www/exntension/
 
