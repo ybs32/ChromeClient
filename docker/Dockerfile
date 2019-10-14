@@ -25,7 +25,7 @@ RUN set -x \
     && apt install -y ./${CHROME_VERSION}
 
 ###
-COPY ./package/boot.sh /var/www/
+COPY ./docker/boot.sh /var/www/
 COPY ./service /var/www/service/
 COPY ./extension /var/www/exntension/
 
