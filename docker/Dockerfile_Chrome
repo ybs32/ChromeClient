@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ybs32/node:11.13.0
 
 ARG GOOGLE_CHROME=google-chrome-stable_77.0.3865.90-1_amd64.deb
 

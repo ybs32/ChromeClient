@@ -1,0 +1,16 @@
+FROM ubuntu:18.04
+
+ARG NODE_VERSION=11.13.0
+
+RUN set -x \
+    && apt update \
+    && apt install -y wget \
+    && apt install -y nodejs npm \
+    && npm cache clean \
+    && npm install -g n \
+    && n ${NODE_VERSION} \
+    && hash -r \
+    && apt purge -y nodejs npm \
+    && apt autoremove -y \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
