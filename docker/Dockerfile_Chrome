@@ -1,0 +1,13 @@
+FROM ubuntu:18.04
+
+ARG GOOGLE_CHROME=google-chrome-stable_77.0.3865.90-1_amd64.deb
+
+RUN set -x \
+    && apt update \
+    && apt install -y wget \
+    && wget http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/${GOOGLE_CHROME} \
+    && apt install -y ./${GOOGLE_CHROME} \
+    && rm ./${GOOGLE_CHROME} \
+    && apt autoremove -y \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
