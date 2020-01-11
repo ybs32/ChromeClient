@@ -22,13 +22,12 @@ COPY ./ChromeClient/script /var/www/script
 COPY --from=build /ChromeClient/service /var/www/service
 COPY --from=build /ChromeClient/extension/dist/chrome /var/www/extension/chrome
 
-WORKDIR /var/www/script
-ENV USER=chrome
+ARG USER=chrome
 RUN set -x \
     && useradd -m -s /bin/bash ${USER} \
     && usermod -aG audio ${USER} \
-    && chown -R $USER:$USER ./boot.sh \
-    && chmod 755 ./boot.sh
-USER ${USER}
+    && chown -R $USER:$USER /var/www/script/* \
+    && chmod 755 /var/www/script/*
 
-# ENTRYPOINT ["/var/www/script/boot.sh"]
+USER ${USER}
+ENTRYPOINT ["/var/www/script/boot.sh"]
