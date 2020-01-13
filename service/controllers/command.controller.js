@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const cmd = require('../services/command.service');
 
 function getList(req, res, next) {
-  cmd.exec('ls -alF ./s', (list, err) => {
+  cmd.exec('ls -alF', (list, err) => {
     if (err) {
       return res.status(500).json({
         result: err.toString()
