@@ -30,9 +30,12 @@ COPY --from=build /ChromeClient/service /var/www/service
 COPY --from=build /ChromeClient/extension/dist/chrome /var/www/extension/chrome
 
 ARG USER=chrome
+ARG UID=1001
 RUN set -x \
-    && useradd -m -s /bin/bash ${USER} \
+    && useradd -m -u ${UID} -s /bin/bash ${USER} \
     && usermod -aG audio ${USER} \
+    && chown -R $USER:$USER /run/user/${UID} \
+    && chown -R $USER:$USER /home/${USER}/.config \
     && chown -R $USER:$USER /var/www/script/* \
     && chmod 755 /var/www/script/*
 
