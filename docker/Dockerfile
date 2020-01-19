@@ -34,6 +34,8 @@ ARG UID=1001
 RUN set -x \
     && useradd -m -u ${UID} -s /bin/bash ${USER} \
     && usermod -aG audio ${USER} \
+    && mkdir -p /run/user/${UID} \
+    && mkdir -p /home/${USER}/.config \
     && chown -R $USER:$USER /run/user/${UID} \
     && chown -R $USER:$USER /home/${USER}/.config \
     && chown -R $USER:$USER /var/www/script/* \
