@@ -16,6 +16,15 @@ RUN set -x \
 ##### Deploy stage
 FROM ybs32/google-chrome-stable:77.0.3865.90-1
 
+RUN set -x \
+    && apt update \
+    && apt install -y \
+       less \
+       pulseaudio \
+    && apt autoremove -y \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY ./ChromeClient/script /var/www/script
 COPY --from=build /ChromeClient/service /var/www/service
 COPY --from=build /ChromeClient/extension/dist/chrome /var/www/extension/chrome
