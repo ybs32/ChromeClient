@@ -8,6 +8,8 @@ RUN set -x \
     && wget http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/${GOOGLE_CHROME} \
     && apt install -y ./${GOOGLE_CHROME} \
     && rm ./${GOOGLE_CHROME} \
+    && rm /etc/apt/sources.list.d/google-chrome.list \
+    && apt-mark hold google-chrome-stable \
     && apt autoremove -y \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
