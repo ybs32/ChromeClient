@@ -1,4 +1,4 @@
-##### Build stage
+##### Build Stage
 FROM ybs32/node:11.13.0 as build
 
 COPY ./ChromeClient /ChromeClient
@@ -13,7 +13,7 @@ RUN set -x \
     && npm run build \
     && cp ./app/scripts/env.js ./dist/chrome/scripts
 
-##### Deploy stage
+##### Deploy Stage
 FROM ybs32/google-chrome-stable:77.0.3865.90-1
 
 RUN set -x \
